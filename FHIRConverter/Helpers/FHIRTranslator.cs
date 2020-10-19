@@ -7,6 +7,9 @@ using Hl7.Fhir.Model;
 
 namespace FHIRConverter.Helpers
 {
+    /// <summary>
+    /// FHIR Translator
+    /// </summary>
     public class FHIRTranslator
     {
         #region Consts

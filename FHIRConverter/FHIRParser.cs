@@ -44,6 +44,13 @@ namespace FHIRConverter
             return null;
         }
 
+
+        /// <summary>
+        /// Create a unique resource identifier
+        /// </summary>
+        /// <param name="resourcePath"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
         private string GetBaseResourceId(string resourcePath, CSVRow row)
         {
             if (resourcePath.Contains("{RowNumber}"))
@@ -82,6 +89,7 @@ namespace FHIRConverter
         ///     Parse Row
         /// </summary>
         /// <param name="baseResourceId"></param>
+        /// <param name="baseReferenceUrl"></param>
         /// <param name="prop"></param>
         /// <param name="columns"></param>
         public void Parse(string baseResourceId, string baseReferenceUrl, FHIRPropertyMapping prop, CSVRow columns)
@@ -102,7 +110,11 @@ namespace FHIRConverter
 
             if (string.IsNullOrEmpty(prop.ResourceBaseType)) throw new ResourceBaseTypeNotDefined();
 
+
+            //Get Base Resource Identifier based on base ResourceId and property Resource Id
             var resourceId = GetBaseResourceId(baseResourceId + prop.ResourceId, columns);
+
+            //if the resource already exists then the property is assigned to the existing resource
             if (_resourceDictionary.ContainsKey(resourceId))
             {
                 root = _resourceDictionary[resourceId].Item2;
@@ -112,17 +124,24 @@ namespace FHIRConverter
             }
             else
             {
+                //Create a new resource
                 root = FHIRTranslator.SetProperty(prop.ResourcePath, prop.ResourceTypes, column.Value,
                     prop.ValueTemplate);
 
+                //Set Resource Id
                 if (root != null && root is Resource && string.IsNullOrEmpty((root as Resource).Id))
                     (root as Resource).Id = resourceId;
+
+                // Add to resource dictionary with the corresponding resource URL for reference
                 _resourceDictionary.Add(resourceId,
-                    Tuple.Create(prop.ResourceBaseType, root,
-                        GetUrl(baseReferenceUrl, prop.ResourceBaseType, root as Resource)));
+                    Tuple.Create(prop.ResourceBaseType,
+                        root,
+                        GetUrl(baseReferenceUrl, 
+                            prop.ResourceBaseType, 
+                            root as Resource)));
             }
 
-
+            //Create Fix properties on the Resource
             if (root != null && prop.FixedProperties != null)
                 CreateFixProperties(root, prop.FixedProperties, columns);
         }
@@ -149,7 +168,7 @@ namespace FHIRConverter
         }
 
         /// <summary>
-        ///     After Parse save data
+        ///     After Parse flush and save data
         /// </summary>
         public void Flush()
         {

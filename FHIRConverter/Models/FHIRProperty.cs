@@ -13,7 +13,7 @@
         /// <summary>
         ///     Resource Type in FHIR Type
         /// </summary>
-        public string ResourceType { get; set; }
+        public string ResourcePathTypes { get; set; }
 
         /// <summary>
         ///     Value

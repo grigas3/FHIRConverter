@@ -33,7 +33,7 @@ namespace FHIRConverter.Models
         /// <summary>
         ///     Resource Types
         /// </summary>
-        public string ResourceTypes { get; set; }
+        public string ResourcePathTypes { get; set; }
 
         /// <summary>
         ///     Resource Path

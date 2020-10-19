@@ -100,7 +100,8 @@
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\RollingFileAppender.cs" />
     <Compile Include="Models\CSVColumn.cs" />
-    <Compile Include="Models\FHIRHierarchy.cs" />
+    <Compile Include="Models\CSVDataset.cs" />
+    <Compile Include="Models\CSVRow.cs" />
     <Compile Include="Models\FHIRMapping.cs" />
     <Compile Include="Models\FHIRProperty.cs" />
     <Compile Include="Models\FHIRPropertyMapping.cs" />

@@ -25,7 +25,7 @@ namespace FHIRConverter.Tests
 
                 ResourcePath = "Code/Text",
                 Value="Test",
-                ResourceType= "CodeableConcept/String"
+                ResourcePathTypes= "CodeableConcept/String"
             });
             FHIRParser.CreateFixProperties(o, fixedProperties);
 
@@ -39,20 +39,8 @@ namespace FHIRConverter.Tests
         {
 
             FHIRMapping parser =new FHIRMapping();
-            parser.Hierarchy = new List<FHIRHierarchy>()
-            {
-                new FHIRHierarchy()
-                {
-                    ResourceName="Patient"
-
-                },
-                new FHIRHierarchy()
-                {
-                    ResourceName = "Observation",
-                    ParentResourceName = "Patient"
-
-                }
-            };
+          
+          
             parser.PropertyMapping = new List<FHIRPropertyMapping>()
             {
                 new FHIRPropertyMapping()
@@ -63,19 +51,19 @@ namespace FHIRConverter.Tests
                     ResourceId = "001001",
                     ResourcePath = "Observation/Value/Value",
                     ResourceBaseType = "Observation",
-                    ResourceTypes = "Observation/SimpleQuantity/Decimal",
+                    ResourcePathTypes = "Observation/SimpleQuantity/Decimal",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Code/Text",
-                            ResourceType = "Observation/CodeableConcept/String",
+                            ResourcePathTypes = "Observation/CodeableConcept/String",
                             Value = "Age"
                         },
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Issued",
-                            ResourceType = "Observation/DateTimeOffset",
+                            ResourcePathTypes = "Observation/DateTimeOffset",
                             Value = "GETDATE"
                         }
                     }
@@ -88,19 +76,19 @@ namespace FHIRConverter.Tests
                     ColumnName = "BMI",
                     ResourceBaseType = "Observation",
                     ResourcePath = "Observation/Value/Value",
-                    ResourceTypes = "Observation/SimpleQuantity/Decimal",
+                    ResourcePathTypes = "Observation/SimpleQuantity/Decimal",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Code/Text",
-                            ResourceType = "Observation/CodeableConcept/String",
+                            ResourcePathTypes = "Observation/CodeableConcept/String",
                             Value = "BMI"
                         },
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Issued",
-                            ResourceType = "Observation/DateTimeOffset",
+                            ResourcePathTypes = "Observation/DateTimeOffset",
                             Value = "GETDATE"
                         }
                     }
@@ -125,19 +113,19 @@ namespace FHIRConverter.Tests
                 ResourceId = "001001",
                 ResourceBaseType = "Observation",
                 ResourcePath = "Observation/Value/Value",
-                ResourceTypes = "Observation/SimpleQuantity/Decimal",
+                ResourcePathTypes = "Observation/SimpleQuantity/Decimal",
                 FixedProperties = new List<FHIRProperty>()
                 {
                     new FHIRProperty()
                     {
                           ResourcePath = "Observation/Code/Text",
-                          ResourceType = "Observation/CodeableConcept/String",
+                          ResourcePathTypes = "Observation/CodeableConcept/String",
                           Value="Code1"
                     },
                       new FHIRProperty()
                     {
                           ResourcePath = "Observation/Issued",
-                          ResourceType = "Observation/DateTimeOffset",
+                          ResourcePathTypes = "Observation/DateTimeOffset",
                           Value="GETDATE"
                     }
                 }

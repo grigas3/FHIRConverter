@@ -80,7 +80,7 @@ namespace FHIRConverter.Helpers.Tests
             FHIRPropertyMapping mapping = new FHIRPropertyMapping()
             {
                 ResourcePath = "Value/Value",
-                ResourceTypes = "SimpleQuantity/Decimal"
+                ResourcePathTypes = "SimpleQuantity/Decimal"
             };
             SetProperty(o, mapping, value);
             Assert.IsTrue(o is Observation);
@@ -101,7 +101,7 @@ namespace FHIRConverter.Helpers.Tests
             FHIRPropertyMapping mapping = new FHIRPropertyMapping()
             {
                 ResourcePath = "Observation/Value/Value",
-                ResourceTypes = "Observation/SimpleQuantity/Decimal"
+                ResourcePathTypes = "Observation/SimpleQuantity/Decimal"
             };
             SetProperty(o, mapping, value);
             Assert.IsTrue(o is Observation);
@@ -120,7 +120,7 @@ namespace FHIRConverter.Helpers.Tests
             FHIRPropertyMapping mapping = new FHIRPropertyMapping()
             {
                 ResourcePath = "Observation/Value/Value",
-                ResourceTypes = "Observation/SimpleQuantity/Decimal"
+                ResourcePathTypes = "Observation/SimpleQuantity/Decimal"
             };
             var o=SetProperty( mapping, value);
             Assert.IsTrue(o is Observation);
@@ -141,7 +141,7 @@ namespace FHIRConverter.Helpers.Tests
             FHIRPropertyMapping mapping = new FHIRPropertyMapping()
             {
                 ResourcePath = "ResearchSubject/Period/Start",
-                ResourceTypes = "ResearchSubject/Period/String"
+                ResourcePathTypes = "ResearchSubject/Period/String"
             };
             var o = SetProperty(mapping, value);
             Assert.IsTrue(o is ResearchSubject);
@@ -155,7 +155,7 @@ namespace FHIRConverter.Helpers.Tests
         private void SetProperty(object root,FHIRPropertyMapping mapping,object value)
         {
 
-            FHIRTranslator.SetProperty(root, mapping.ResourcePath, value,mapping.ResourceTypes);
+            FHIRTranslator.SetProperty(root, mapping.ResourcePath, value,mapping.ResourcePathTypes);
 
         }
 
@@ -163,7 +163,7 @@ namespace FHIRConverter.Helpers.Tests
         private object SetProperty( FHIRPropertyMapping mapping, object value)
         {
 
-            return FHIRTranslator.SetProperty(mapping.ResourcePath,  mapping.ResourceTypes,value);
+            return FHIRTranslator.SetProperty(mapping.ResourcePath,  mapping.ResourcePathTypes,value);
 
         }
 

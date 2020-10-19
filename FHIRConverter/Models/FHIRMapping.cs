@@ -9,12 +9,7 @@ namespace FHIRConverter.Models
     /// </summary>
     public class FHIRMapping
     {
-        /// <summary>
-        ///     The input file has Header
-        /// </summary>
-        public bool Header { get; set; }
-
-
+      
         /// <summary>
         ///     Base Resource Id
         ///     Interpolation of Row Properties
@@ -26,27 +21,26 @@ namespace FHIRConverter.Models
         /// </summary>
         public List<FHIRPropertyMapping> PropertyMapping { get; set; }
 
-        /// <summary>
-        ///     Specification of Resource Hierarchy
-        /// </summary>
-        public List<FHIRHierarchy> Hierarchy { get; set; }
-
+    
         /// <summary>
         ///     Base Reference Url
         /// </summary>
         public string BaseReferenceUrl { get; set; }
 
-        /// <summary>
-        ///     Reference Schema including properties like the Resource type and resource identifier
-        /// </summary>
-        public string ReferenceSchema { get; set; }
-
+      /// <summary>
+      /// To Json
+      /// </summary>
+      /// <param name="file"></param>
         public void ToJson(string file)
         {
             var s = JsonConvert.SerializeObject(this);
             File.WriteAllText(file, s);
         }
-
+        /// <summary>
+        /// From Json
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static FHIRMapping FromJson(string file)
         {
             var jsonTxt = File.ReadAllText(file);
