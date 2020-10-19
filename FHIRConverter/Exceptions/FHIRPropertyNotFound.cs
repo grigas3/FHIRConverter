@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FHIRConverter.Exceptions
 {
-    public class FHIRPropertyNotFound:Exception
+    public class FHIRPropertyNotFound : Exception
     {
     }
 }

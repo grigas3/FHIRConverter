@@ -1,61 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FHIRConverter.Models
 {
     /// <summary>
-    /// CSV Dataset
+    ///     CSV Dataset
     /// </summary>
     public class CSVDataset
     {
         /// <summary>
-        /// File Name
+        ///     File Name
         /// </summary>
         public string FileName { get; set; }
+
         /// <summary>
-        /// Date
+        ///     Date
         /// </summary>
         public DateTime Date { get; set; }
 
         /// <summary>
-        /// Rows
+        ///     Rows
         /// </summary>
         public List<CSVRow> Rows { get; set; }
-
     }
-    
+
     /// <summary>
-    /// CSV Row
+    ///     CSV Row
     /// </summary>
-    public class CSVRow:List<CSVColumn>
+    public class CSVRow : List<CSVColumn>
     {
         public int RowNumber { get; set; }
     }
 
     /// <summary>
-    /// Column of CSV File
+    ///     Column of CSV File
     /// </summary>
     public class CSVColumn
     {
         /// <summary>
-        /// Column Name
+        ///     Column Name
         /// </summary>
         public string ColumnName { get; set; }
 
         /// <summary>
-        /// Column Index
+        ///     Column Index
         /// </summary>
         public int? ColumnIndex { get; set; }
 
         /// <summary>
-        /// Column Value
+        ///     Column Value
         /// </summary>
         public string Value { get; set; }
     }
-
-    
-
 }

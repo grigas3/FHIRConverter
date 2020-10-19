@@ -51,11 +51,15 @@
     <Reference Include="Hl7.FhirPath, Version=1.9.0.0, Culture=neutral, PublicKeyToken=d706911480550fc3, processorArchitecture=MSIL">
       <HintPath>..\packages\Hl7.FhirPath.1.9.0\lib\net45\Hl7.FhirPath.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
@@ -75,6 +79,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,10 +92,13 @@
     <Compile Include="Exceptions\ResourceIdPathException.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="FHIRParser.cs" />
-    <Compile Include="Helpers\FHIRResourceDictionary.cs" />
     <Compile Include="Helpers\FHIRTranslator.cs" />
     <Compile Include="IFHIRRepository.cs" />
     <Compile Include="Loaders\CSVLoader.cs" />
+    <Compile Include="Logging\FileAppender.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\RollingFileAppender.cs" />
     <Compile Include="Models\CSVColumn.cs" />
     <Compile Include="Models\FHIRHierarchy.cs" />
     <Compile Include="Models\FHIRMapping.cs" />
@@ -98,6 +106,7 @@
     <Compile Include="Models\FHIRPropertyMapping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\SimpleFHIRStore.cs" />
     <Compile Include="Tests\DummyResourceCreator.cs" />
   </ItemGroup>
   <ItemGroup>

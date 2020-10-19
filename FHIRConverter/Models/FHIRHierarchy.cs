@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FHIRConverter.Models
+﻿namespace FHIRConverter.Models
 {
-
     /// <summary>
-    /// Model to define an FHIR Hieararchy for the mapping process
+    ///     Model to define an FHIR Hieararchy for the mapping process
     /// </summary>
     public class FHIRHierarchy
     {
         /// <summary>
-        /// Resource Name used in mapping
+        ///     Resource Name used in mapping
         /// </summary>
         public string ResourceName { get; set; }
 
         /// <summary>
-        /// Parent Resource Name used in mapping
-        /// Important. For setting parent resource, only one resource per data row should be declared
+        ///     Parent Resource Name used in mapping
+        ///     Important. For setting parent resource, only one resource per data row should be declared
         /// </summary>
         public string ParentResourceName { get; set; }
 
         /// <summary>
-        /// FHIR References
+        ///     FHIR References
         /// </summary>
         public string FHIRReference { get; set; }
-
     }
 }
