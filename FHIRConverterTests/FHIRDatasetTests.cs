@@ -35,7 +35,7 @@ namespace FHIRConverterTests
                     ResourceId = "0000001001",
                     ResourcePath = "ResearchSubject/Id",
                     ResourceBaseType = "ResearchSubject",
-                    ResourceTypes = "ResearchSubject/String",
+                    ResourcePathTypes = "ResearchSubject/String",
 
 
                 },
@@ -47,14 +47,14 @@ namespace FHIRConverterTests
                     ResourceId = "0000001001",
                     ResourcePath = "ResearchSubject/Study/Reference",
                     ResourceBaseType = "ResearchSubject",
-                    ResourceTypes = "ResearchSubject/ResourceReference/String",
+                    ResourcePathTypes = "ResearchSubject/ResourceReference/String",
                     ValueTemplate="http://www.silicofcm.com/fhir/researchStudy/study1",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "ResearchSubject/Study/Type",
-                            ResourceType = "ResearchSubject/ResourceReference/String",
+                            ResourcePathTypes = "ResearchSubject/ResourceReference/String",
                             Value = "ResearchStudy"
                         }
 
@@ -68,13 +68,13 @@ namespace FHIRConverterTests
                     ResourceId = "{RowNumber}002002",
                     ResourcePath = "Observation/Value/Value",
                     ResourceBaseType = "Observation",
-                    ResourceTypes = "Observation/SimpleQuantity/Double",
+                    ResourcePathTypes = "Observation/SimpleQuantity/Double",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Code/Text",
-                            ResourceType = "Observation/CodeableConcept/String",
+                            ResourcePathTypes = "Observation/CodeableConcept/String",
                             Value = "Age"
                         }
                        
@@ -89,14 +89,14 @@ namespace FHIRConverterTests
                     ResourceId = "{RowNumber}002002",
                     ResourcePath = "Observation/Subject/Reference",
                     ResourceBaseType = "Observation",
-                    ResourceTypes = "Observation/ResourceReference/String",
+                    ResourcePathTypes = "Observation/ResourceReference/String",
                     ValueTemplate="http://www.silicofcm.com/fhir/researchSubject/{value}",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Subject/Type",
-                            ResourceType = "Observation/ResourceReference/String",
+                            ResourcePathTypes = "Observation/ResourceReference/String",
                             Value = "ResearchSubject"
                         }
 
@@ -112,13 +112,13 @@ namespace FHIRConverterTests
                     ColumnName = "BP_Diastolic",
                     ResourceBaseType = "Observation",
                     ResourcePath = "Observation/Value/Value",
-                    ResourceTypes = "Observation/SimpleQuantity/Double",
+                    ResourcePathTypes = "Observation/SimpleQuantity/Double",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Code/Text",
-                            ResourceType = "Observation/CodeableConcept/String",
+                            ResourcePathTypes = "Observation/CodeableConcept/String",
                             Value = "Diastolic Blood Pressure"
                         }
                       
@@ -132,14 +132,14 @@ namespace FHIRConverterTests
                     ResourceId = "{RowNumber}002003",
                     ResourcePath = "Observation/Subject/Reference",
                     ResourceBaseType = "Observation",
-                    ResourceTypes = "Observation/ResourceReference/String",
+                    ResourcePathTypes = "Observation/ResourceReference/String",
                     ValueTemplate="http://www.silicofcm.com/fhir/researchSubject/{value}",
                     FixedProperties = new List<FHIRProperty>()
                     {
                         new FHIRProperty()
                         {
                             ResourcePath = "Observation/Subject/Type",
-                            ResourceType = "Observation/ResourceReference/String",
+                            ResourcePathTypes = "Observation/ResourceReference/String",
                             Value = "ResearchSubject"
                         }
 
@@ -153,7 +153,7 @@ namespace FHIRConverterTests
                     ColumnName = "Encounter_Date",
                     ResourceBaseType = "Observation",
                     ResourcePath = "Observation/Issued",
-                    ResourceTypes = "Observation/DateTimeOffset",
+                    ResourcePathTypes = "Observation/DateTimeOffset",
                    
                 },
                
@@ -165,7 +165,7 @@ namespace FHIRConverterTests
                 ColumnName = "Encounter_Date",
                 ResourceBaseType = "Observation",
                 ResourcePath = "Observation/Issued",
-                ResourceTypes = "Observation/DateTimeOffset",
+                ResourcePathTypes = "Observation/DateTimeOffset",
 
             }
 
@@ -181,15 +181,28 @@ namespace FHIRConverterTests
 
         private class DummFHIRStore : IFHIRRepository
         {
-            Bundle b = new Bundle();
-            
+            private Bundle b = new Bundle()
+            {
+                Type = Bundle.BundleType.Transaction
+
+            };
+
+            private string GetUrl(Resource r)
+            {
+
+                return r.GetType().Name;
+
+            }
+
             public void StoreResource(string resourceName, object resource,string url)
             {
                 if (resource is Resource)
                 {
                     var s=(resource as Resource).ToJson();
-                    b.AddResourceEntry((resource as Resource), url);
+                    b.AddResourceEntry((resource as Resource), url).Request = new Bundle.RequestComponent() { Method = Bundle.HTTPVerb.POST,Url=GetUrl((resource as Resource)) }; ;
                 }
+
+
             }
 
             public void SaveJson(string file)

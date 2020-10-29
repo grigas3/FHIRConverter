@@ -119,13 +119,13 @@ namespace FHIRConverter
             {
                 root = _resourceDictionary[resourceId].Item2;
 
-                FHIRTranslator.SetProperty(root, prop.ResourcePath, column.Value, prop.ResourceTypes,
+                FHIRTranslator.SetProperty(root, prop.ResourcePath, column.Value, prop.ResourcePathTypes,
                     prop.ValueTemplate);
             }
             else
             {
                 //Create a new resource
-                root = FHIRTranslator.SetProperty(prop.ResourcePath, prop.ResourceTypes, column.Value,
+                root = FHIRTranslator.SetProperty(prop.ResourcePath, prop.ResourcePathTypes, column.Value,
                     prop.ValueTemplate);
 
                 //Set Resource Id
@@ -164,7 +164,7 @@ namespace FHIRConverter
                 throw new ArgumentNullException();
             //Add to object (FHIR Resource) all fixed properties
             foreach (var c in fixProps)
-                FHIRTranslator.SetProperty(root, c.ResourcePath, ConvertValue(c.Value, columns), c.ResourceType);
+                FHIRTranslator.SetProperty(root, c.ResourcePath, ConvertValue(c.Value, columns), c.ResourcePathTypes);
         }
 
         /// <summary>
